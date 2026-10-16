@@ -1,0 +1,1 @@
+"""ERP Translator desktop application."""

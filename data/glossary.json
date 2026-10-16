@@ -1,0 +1,596 @@
+[
+  {
+    "spanish": "Gestionar Recepción de Mercancía",
+    "english": "Manage Goods Receipt",
+    "explanation": "ERP action used to record incoming goods from a supplier.",
+    "category": "receiving"
+  },
+  {
+    "spanish": "Entrada de mercancía",
+    "english": "Goods Receipt",
+    "explanation": "The receipt transaction that records goods arriving into stock.",
+    "category": "receiving"
+  },
+  {
+    "spanish": "Proveedor",
+    "english": "Supplier",
+    "explanation": "The business or grower supplying goods or services.",
+    "category": "purchasing"
+  },
+  {
+    "spanish": "Almacén de destino",
+    "english": "Destination Warehouse",
+    "explanation": "The warehouse that will receive a stock movement.",
+    "category": "warehouse"
+  },
+  {
+    "spanish": "Almacén",
+    "english": "Warehouse",
+    "explanation": "A warehouse or inventory storage site.",
+    "category": "warehouse"
+  },
+  {
+    "spanish": "Ubicación por defecto",
+    "english": "Default Location",
+    "explanation": "The storage location selected automatically for an item or transaction.",
+    "category": "warehouse"
+  },
+  {
+    "spanish": "Partida",
+    "english": "Lot / Batch",
+    "explanation": "Traceability identifier used to follow a specific quantity of product through reception, packing, storage, and sales.",
+    "category": "traceability"
+  },
+  {
+    "spanish": "Código de artículo",
+    "english": "Item Code",
+    "explanation": "The unique ERP code assigned to an item or SKU.",
+    "category": "items"
+  },
+  {
+    "spanish": "Familia de artículos",
+    "english": "Item Family",
+    "explanation": "A group used to classify related items.",
+    "category": "items"
+  },
+  {
+    "spanish": "Artículo",
+    "english": "Item / SKU",
+    "explanation": "A product, material, or stock-keeping unit in the ERP.",
+    "category": "items"
+  },
+  {
+    "spanish": "Confección",
+    "english": "Packing / Packing Format / Presentation",
+    "explanation": "The packhouse process or commercial presentation used to prepare produce, not clothing manufacture.",
+    "category": "packing"
+  },
+  {
+    "spanish": "Envase",
+    "english": "Package / Container",
+    "explanation": "A box, tray, bag, or other container used for produce.",
+    "category": "packing"
+  },
+  {
+    "spanish": "Número de palets",
+    "english": "Number of Pallets",
+    "explanation": "The pallet count for a transaction or shipment.",
+    "category": "logistics"
+  },
+  {
+    "spanish": "Nº palets",
+    "english": "Number of Pallets",
+    "explanation": "Abbreviated pallet count.",
+    "category": "logistics"
+  },
+  {
+    "spanish": "Palet",
+    "english": "Pallet",
+    "explanation": "A pallet used for storage or transport.",
+    "category": "logistics"
+  },
+  {
+    "spanish": "Número de envases",
+    "english": "Number of Packages",
+    "explanation": "The number of packages or containers.",
+    "category": "packing"
+  },
+  {
+    "spanish": "Nº envases",
+    "english": "Number of Packages",
+    "explanation": "Abbreviated package or container count.",
+    "category": "packing"
+  },
+  {
+    "spanish": "Peso bruto",
+    "english": "Gross Weight",
+    "explanation": "Product weight including packaging.",
+    "category": "measurements"
+  },
+  {
+    "spanish": "Peso neto",
+    "english": "Net Weight",
+    "explanation": "Product weight excluding packaging.",
+    "category": "measurements"
+  },
+  {
+    "spanish": "Fecha de análisis",
+    "english": "Analysis Date",
+    "explanation": "The date on which a quality or laboratory analysis was performed.",
+    "category": "quality"
+  },
+  {
+    "spanish": "Fecha de recolección",
+    "english": "Harvest Date",
+    "explanation": "The date produce was harvested.",
+    "category": "agriculture"
+  },
+  {
+    "spanish": "Franja de recolección",
+    "english": "Harvest Time Slot",
+    "explanation": "A scheduled time window for harvesting produce.",
+    "category": "agriculture"
+  },
+  {
+    "spanish": "Albaranes asociados",
+    "english": "Associated Delivery Notes",
+    "explanation": "Delivery notes linked to the current transaction or record.",
+    "category": "logistics"
+  },
+  {
+    "spanish": "Albarán",
+    "english": "Delivery Note",
+    "explanation": "A document that records goods delivered or received.",
+    "category": "logistics"
+  },
+  {
+    "spanish": "Contrato de compra",
+    "english": "Purchase Contract",
+    "explanation": "An agreement defining terms for purchasing produce or other goods.",
+    "category": "purchasing"
+  },
+  {
+    "spanish": "Compras",
+    "english": "Purchasing",
+    "explanation": "The purchasing or procurement module.",
+    "category": "purchasing"
+  },
+  {
+    "spanish": "Ventas",
+    "english": "Sales",
+    "explanation": "The sales module or sales-related setting.",
+    "category": "sales"
+  },
+  {
+    "spanish": "Trazabilidad",
+    "english": "Traceability",
+    "explanation": "The ability to track produce and materials through the supply chain.",
+    "category": "traceability"
+  },
+  {
+    "spanish": "Cargos y abonos",
+    "english": "Charges and Credits",
+    "explanation": "Additional charges and credit or deduction adjustments.",
+    "category": "finance"
+  },
+  {
+    "spanish": "Cargo",
+    "english": "Charge",
+    "explanation": "An amount charged to an account or transaction.",
+    "category": "finance"
+  },
+  {
+    "spanish": "Abono",
+    "english": "Credit / Deduction",
+    "explanation": "A credit note, allowance, or amount deducted from an account.",
+    "category": "finance"
+  },
+  {
+    "spanish": "Acreedor",
+    "english": "Creditor / Payee",
+    "explanation": "A party to whom money is owed or paid, depending on the ERP context.",
+    "category": "finance"
+  },
+  {
+    "spanish": "Precio",
+    "english": "Price",
+    "explanation": "The price per item or unit.",
+    "category": "finance"
+  },
+  {
+    "spanish": "Importe",
+    "english": "Amount",
+    "explanation": "A monetary total or line amount.",
+    "category": "finance"
+  },
+  {
+    "spanish": "Cantidad",
+    "english": "Quantity",
+    "explanation": "The recorded number or amount of product.",
+    "category": "measurements"
+  },
+  {
+    "spanish": "Unidad de medida",
+    "english": "Unit of Measure",
+    "explanation": "The unit used to express a quantity, such as kilograms or units.",
+    "category": "measurements"
+  },
+  {
+    "spanish": "Marca",
+    "english": "Brand",
+    "explanation": "The commercial brand assigned to a product.",
+    "category": "items"
+  },
+  {
+    "spanish": "Variedad",
+    "english": "Variety",
+    "explanation": "The agricultural cultivar or commercial variety.",
+    "category": "agriculture"
+  },
+  {
+    "spanish": "Cultivo",
+    "english": "Crop",
+    "explanation": "A crop being grown or managed.",
+    "category": "agriculture"
+  },
+  {
+    "spanish": "Finca",
+    "english": "Farm / Plot",
+    "explanation": "A farm, estate, or defined growing plot.",
+    "category": "agriculture"
+  },
+  {
+    "spanish": "Datos Generales",
+    "english": "General Data",
+    "explanation": "The main general-information section of a record.",
+    "category": "interface"
+  },
+  {
+    "spanish": "Datos Complementarios",
+    "english": "Additional Data",
+    "explanation": "A section containing supplementary record information.",
+    "category": "interface"
+  },
+  {
+    "spanish": "Características del artículo",
+    "english": "Item Characteristics",
+    "explanation": "Attributes specifically assigned to an item or SKU.",
+    "category": "items"
+  },
+  {
+    "spanish": "Características",
+    "english": "Characteristics",
+    "explanation": "Attributes or properties of a record or product.",
+    "category": "items"
+  },
+  {
+    "spanish": "Código",
+    "english": "Code",
+    "explanation": "An ERP identifier or reference code.",
+    "category": "interface"
+  },
+  {
+    "spanish": "Nombre",
+    "english": "Name",
+    "explanation": "The name assigned to a record.",
+    "category": "interface"
+  },
+  {
+    "spanish": "Descripción corta",
+    "english": "Short Description",
+    "explanation": "A shortened description used in limited display space.",
+    "category": "interface"
+  },
+  {
+    "spanish": "Descripción",
+    "english": "Description",
+    "explanation": "Descriptive text for a record or item.",
+    "category": "interface"
+  },
+  {
+    "spanish": "Tipo de artículo",
+    "english": "Item Type",
+    "explanation": "A classification defining the kind of ERP item.",
+    "category": "items"
+  },
+  {
+    "spanish": "Consumo",
+    "english": "Consumption",
+    "explanation": "The use or issue of stock, materials, or resources.",
+    "category": "inventory"
+  },
+  {
+    "spanish": "Familia de nivel superior",
+    "english": "Parent Family",
+    "explanation": "The higher-level category containing the current item family.",
+    "category": "items"
+  },
+  {
+    "spanish": "Proveedor por defecto",
+    "english": "Default Supplier",
+    "explanation": "The supplier selected automatically for an item.",
+    "category": "purchasing"
+  },
+  {
+    "spanish": "Códigos de barras",
+    "english": "Barcodes",
+    "explanation": "Machine-readable product or package identifiers.",
+    "category": "items"
+  },
+  {
+    "spanish": "Unidades de medida",
+    "english": "Units of Measure",
+    "explanation": "The units available for recording quantities.",
+    "category": "measurements"
+  },
+  {
+    "spanish": "Composiciones",
+    "english": "Compositions",
+    "explanation": "Definitions of components or materials that make up an item.",
+    "category": "items"
+  },
+  {
+    "spanish": "Productos hortofrutícolas",
+    "english": "Fresh Produce / Fruit and Vegetable Products",
+    "explanation": "Fresh fruit and vegetable products handled by the packhouse.",
+    "category": "agriculture"
+  },
+  {
+    "spanish": "Tomate",
+    "english": "Tomato",
+    "explanation": "Tomato produce.",
+    "category": "produce"
+  },
+  {
+    "spanish": "Judía plana",
+    "english": "Flat Green Bean",
+    "explanation": "A flat-pod green bean product type.",
+    "category": "produce"
+  },
+  {
+    "spanish": "Judía redonda",
+    "english": "Round Green Bean",
+    "explanation": "A round-pod green bean product type.",
+    "category": "produce"
+  },
+  {
+    "spanish": "Judía",
+    "english": "Bean / Green Bean",
+    "explanation": "Bean produce; commonly green beans in this packhouse context.",
+    "category": "produce"
+  },
+  {
+    "spanish": "BIO",
+    "english": "Organic",
+    "explanation": "Organic-certified produce or production.",
+    "category": "produce"
+  },
+  {
+    "spanish": "Rama",
+    "english": "On the Vine",
+    "explanation": "For tomatoes, fruit marketed and packed while attached to the vine.",
+    "category": "produce"
+  },
+  {
+    "spanish": "Pera",
+    "english": "Pear-Shaped / Plum Type",
+    "explanation": "A pear-shaped or plum-type tomato classification in this ERP context.",
+    "category": "produce"
+  },
+  {
+    "spanish": "Larga vida",
+    "english": "Long-Life",
+    "explanation": "A produce variety or type selected for extended shelf life.",
+    "category": "produce"
+  },
+  {
+    "spanish": "Administración Sistema",
+    "english": "System Administration",
+    "explanation": "Administration of system-level settings and configuration.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Administración General",
+    "english": "General Administration",
+    "explanation": "General administrative functions within the ERP.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Administración Datos de Negocio",
+    "english": "Business Data Administration",
+    "explanation": "Administration of master and operational business data.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Control de Producción",
+    "english": "Production Control",
+    "explanation": "Planning, recording, and monitoring production operations.",
+    "category": "production"
+  },
+  {
+    "spanish": "Control de Calidad",
+    "english": "Quality Control",
+    "explanation": "Inspection and management of product quality requirements.",
+    "category": "quality"
+  },
+  {
+    "spanish": "Comercializadora",
+    "english": "Commercial / Trading",
+    "explanation": "The commercial or trading business entity or module.",
+    "category": "sales"
+  },
+  {
+    "spanish": "Gestión de confección",
+    "english": "Packing Management",
+    "explanation": "Management of packhouse packing operations and formats.",
+    "category": "packing"
+  },
+  {
+    "spanish": "Órdenes de carga",
+    "english": "Loading Orders",
+    "explanation": "Instructions that define goods to be loaded for dispatch.",
+    "category": "logistics"
+  },
+  {
+    "spanish": "Género",
+    "english": "Produce / Goods / Merchandise",
+    "explanation": "Produce or merchandise handled by the ERP; it does not mean gender in this context.",
+    "category": "items"
+  },
+  {
+    "spanish": "Configuración de Parámetros",
+    "english": "Parameter Settings",
+    "explanation": "System screen for maintaining ERP configuration parameters.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Configuración del Entorno de Trabajo",
+    "english": "Work Environment Settings",
+    "explanation": "Configuration of the user's ERP working environment.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Parte de producción",
+    "english": "Production Report / Production Sheet",
+    "explanation": "Operational record used to report a production or packing run.",
+    "category": "production"
+  },
+  {
+    "spanish": "Delegaciones AEAT",
+    "english": "Tax Agency Offices",
+    "explanation": "Regional offices of Spain's State Tax Administration Agency.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Calendarios Laborales",
+    "english": "Work Calendars",
+    "explanation": "Calendars defining working days, shifts, and public holidays.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Carga del Calendario",
+    "english": "Calendar Import",
+    "explanation": "ERP action used to load calendar dates and working days.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Códigos Postales",
+    "english": "Postal Codes",
+    "explanation": "Master data for postal or ZIP codes.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Dispositivos Conectados",
+    "english": "Connected Devices",
+    "explanation": "Devices configured to communicate with the ERP.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Administraciones AEAT",
+    "english": "Tax Agency Administrations",
+    "explanation": "Administrative offices of Spain's State Tax Administration Agency.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Divisas",
+    "english": "Currencies",
+    "explanation": "Currency master data used in financial transactions.",
+    "category": "finance"
+  },
+  {
+    "spanish": "Entidades Bancarias",
+    "english": "Banks / Financial Institutions",
+    "explanation": "Bank and financial institution master records.",
+    "category": "finance"
+  },
+  {
+    "spanish": "Estructura Empresarial",
+    "english": "Corporate Structure",
+    "explanation": "The organizational structure of companies and business units.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Idiomas",
+    "english": "Languages",
+    "explanation": "Languages configured in the ERP.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Consulta de relaciones y documentos",
+    "english": "Related Records and Documents",
+    "explanation": "Screen used to view linked ERP records and their associated documents.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Consulta relaciones y documentos",
+    "english": "Related Records and Documents",
+    "explanation": "Screen used to view linked ERP records and their associated documents.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Configuración de Sujetos",
+    "english": "Business Partner Settings",
+    "explanation": "Configuration of customers, suppliers, growers, and other business partners.",
+    "category": "business-data"
+  },
+  {
+    "spanish": "Consulta relaciones y situación Sujeto",
+    "english": "Business Partner Relationships and Status",
+    "explanation": "Screen used to review a business partner's linked records and current status.",
+    "category": "business-data"
+  },
+  {
+    "spanish": "Países",
+    "english": "Countries",
+    "explanation": "Country master data.",
+    "category": "business-data"
+  },
+  {
+    "spanish": "Países por Idioma",
+    "english": "Countries by Language",
+    "explanation": "Country names and descriptions maintained for each language.",
+    "category": "business-data"
+  },
+  {
+    "spanish": "Parametrización de términos",
+    "english": "Term Configuration",
+    "explanation": "Configuration of terminology used by the ERP.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Comunidades autónomas",
+    "english": "Autonomous Communities",
+    "explanation": "Spanish autonomous-community master data.",
+    "category": "business-data"
+  },
+  {
+    "spanish": "Poblaciones",
+    "english": "Towns / Municipalities",
+    "explanation": "Town and municipality master data used in addresses.",
+    "category": "business-data"
+  },
+  {
+    "spanish": "Provincias",
+    "english": "Provinces",
+    "explanation": "Province master data used in addresses.",
+    "category": "business-data"
+  },
+  {
+    "spanish": "Localidades INE",
+    "english": "INE Localities",
+    "explanation": "Locality master data based on Spain's National Statistics Institute codes.",
+    "category": "business-data"
+  },
+  {
+    "spanish": "Tipos de Emails Reservados",
+    "english": "Reserved Email Types",
+    "explanation": "Categories of email addresses reserved for defined ERP purposes.",
+    "category": "administration"
+  },
+  {
+    "spanish": "Gestión de Negocio - General",
+    "english": "Business Management - General",
+    "explanation": "General business-management functions and master data.",
+    "category": "business-data"
+  }
+]
