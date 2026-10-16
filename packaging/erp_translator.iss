@@ -1,5 +1,5 @@
 #define AppName "ERP Translator"
-#define AppVersion "1.0.0"
+#define AppVersion "1.0.1"
 #define AppPublisher "Nature Growers"
 #define AppExeName "ERP Translator.exe"
 

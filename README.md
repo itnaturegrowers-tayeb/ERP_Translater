@@ -8,7 +8,7 @@ Output can be selected in Settings: Spanish, English, French, or Arabic. French 
 
 ## Install the packaged app
 
-Download and run `ERP-Translator-Setup-1.0.0.exe`. The installer includes the app, Spanish OCR, and all four offline translation models, so the destination laptop does not need Python, Tesseract, or internet access. It installs for the current Windows user and can optionally create a desktop shortcut.
+Download and run `ERP-Translator-Setup-1.0.1.exe`. The installer includes the app, Spanish OCR, and all four offline translation models, so the destination laptop does not need Python, Tesseract, or internet access. It installs for the current Windows user and can optionally create a desktop shortcut.
 
 Windows may show a SmartScreen warning because the installer is not code-signed. Confirm that the SHA-256 checksum matches the value published with the release before allowing it.
 
@@ -77,7 +77,7 @@ python -m pip install -r requirements-build.txt
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\packaging\build.ps1
 ```
 
-The portable application is written to `dist\ERP Translator`, and the distributable installer is written to `installer-output\ERP-Translator-Setup-1.0.0.exe`. Build outputs and staged model files are intentionally excluded from Git because the installer is hundreds of megabytes; publish the installer as a GitHub Release asset instead.
+The portable application is written to `dist\ERP Translator`, and the distributable installer is written to `installer-output\ERP-Translator-Setup-1.0.1.exe`. Build outputs and staged model files are intentionally excluded from Git because the installer is hundreds of megabytes; publish the installer as a GitHub Release asset instead.
 
 Use `-SkipInstaller` to build only the portable application. The staging script also accepts custom `-TesseractRoot` and `-ModelRoot` paths.
 

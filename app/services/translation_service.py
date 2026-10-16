@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 import logging
+import re
 
 from app.models.translation_result import GlossaryMatch, TranslationResult
 from app.services.glossary_service import GlossaryService
@@ -81,7 +82,7 @@ class TranslationService:
                         translated_segments.append(segment)
                         continue
                     core = segment.strip()
-                    generic_segment = self.provider.translate(core, "es", "en")
+                    generic_segment = self._safe_translate(core, "es", "en")
                     if generic_segment:
                         leading = segment[: len(segment) - len(segment.lstrip())]
                         trailing = segment[len(segment.rstrip()) :]
@@ -91,7 +92,7 @@ class TranslationService:
                 output.append("".join(translated_segments).strip())
                 continue
 
-            generic = self.provider.translate(line, "es", "en")
+            generic = self._safe_translate(line, "es", "en")
             output.append(generic if generic else f"[Untranslated] {line}")
 
         explanation = ""
@@ -128,8 +129,32 @@ class TranslationService:
             if not line.strip():
                 translated_lines.append("")
                 continue
-            translated_lines.append(self.provider.translate(line, source, target) or line)
+            translated_lines.append(self._safe_translate(line, source, target) or line)
         return "\n".join(translated_lines)
+
+    def _safe_translate(self, text: str, source: str, target: str) -> str | None:
+        translated = self.provider.translate(text, source, target)
+        if not translated or not self._translation_is_sane(text, translated):
+            if translated:
+                LOGGER.warning("Rejected suspicious translation output for %r", text)
+            return None
+        return translated
+
+    @staticmethod
+    def _translation_is_sane(source: str, translated: str) -> bool:
+        if len(translated) > max(160, len(source) * 5):
+            return False
+        if re.search(r"([^\w\s])\1{4,}", translated):
+            return False
+        tokens = re.findall(r"\w+|[^\w\s]", translated.casefold())
+        if len(tokens) >= 16 and len(set(tokens)) / len(tokens) < 0.3:
+            return False
+        for size in (1, 2, 3):
+            for index in range(len(tokens) - size * 4 + 1):
+                chunk = tokens[index : index + size]
+                if all(tokens[index + size * repeat : index + size * (repeat + 1)] == chunk for repeat in range(1, 4)):
+                    return False
+        return True
 
     @staticmethod
     def _append_unique(target: list[GlossaryMatch], additions: list[GlossaryMatch]) -> None:

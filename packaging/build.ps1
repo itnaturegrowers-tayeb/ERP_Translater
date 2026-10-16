@@ -19,6 +19,13 @@ $DistInternal = Join-Path $ProjectRoot "dist\ERP Translator\_internal"
 $TesseractSource = Join-Path $PSScriptRoot "resources\tesseract"
 Copy-Item -LiteralPath $TesseractSource -Destination $DistInternal -Recurse
 
+# The staged models and OCR engine are now inside dist. Remove the duplicate
+# staging copy before Inno Setup creates its compressed installer.
+$StagedResources = Join-Path $PSScriptRoot "resources"
+if (Test-Path -LiteralPath $StagedResources) {
+    Remove-Item -LiteralPath $StagedResources -Recurse -Force
+}
+
 if (-not $SkipInstaller) {
     $CompilerCandidates = @(
         "C:\Program Files (x86)\Inno Setup 6\ISCC.exe",

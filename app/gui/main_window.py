@@ -176,18 +176,24 @@ class MainWindow(QMainWindow):
         if screen is None:
             return
         bounds = screen.geometry()
-        # ERP tree rows are normally 18–26 px tall. A narrow strip prevents OCR
-        # from selecting the row above or below the pointer.
-        region = QRect(pointer.x() - 300, pointer.y() - 10, 600, 20).intersected(bounds)
+        # Keep enough height for a complete glyph, then let word-level OCR select
+        # the text cluster nearest the pointer. The old 600 px single-line strip
+        # also swallowed values from the ERP grid beside the navigation tree.
+        region = QRect(pointer.x() - 240, pointer.y() - 16, 480, 32).intersected(bounds)
         if region.width() < 50 or region.height() < 12:
             return
         try:
             image = self.screenshot_service.capture(region)
+            target = (
+                round((pointer.x() - region.x()) * image.width / region.width()),
+                round((pointer.y() - region.y()) * image.height / region.height()),
+            )
             self._hover_busy = True
             self.hover_popup.show_status("Reading and translating…", pointer)
             worker = HoverTranslationWorker(
                 image,
                 pointer,
+                target,
                 self.ocr_service,
                 self.translation_service,
                 self.explain.isChecked(),

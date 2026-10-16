@@ -21,6 +21,7 @@ class HoverTranslationWorker(QRunnable):
         self,
         image: Image.Image,
         pointer: QPoint,
+        target: tuple[int, int],
         ocr_service: OCRService,
         translation_service: TranslationService,
         explain: bool,
@@ -29,6 +30,7 @@ class HoverTranslationWorker(QRunnable):
         super().__init__()
         self.image = image
         self.pointer = pointer
+        self.target = target
         self.ocr_service = ocr_service
         self.translation_service = translation_service
         self.explain = explain
@@ -38,7 +40,7 @@ class HoverTranslationWorker(QRunnable):
     @Slot()
     def run(self) -> None:
         try:
-            text = self.ocr_service.extract_hover_line(self.image).strip()
+            text = self.ocr_service.extract_hover_line(self.image, self.target).strip()
             result = (
                 self.translation_service.translate(text, self.explain, self.target_language)
                 if text

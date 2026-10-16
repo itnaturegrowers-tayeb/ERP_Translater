@@ -14,6 +14,11 @@ class StubProvider(TranslationProvider):
         }.get((text, source_language, target_language))
 
 
+class RepeatingProvider(TranslationProvider):
+    def translate(self, text: str, source_language: str, target_language: str) -> str | None:
+        return "124) 124) 124) 124) 124) 124)"
+
+
 def service() -> TranslationService:
     return TranslationService(GlossaryService(Path("data/glossary.json")))
 
@@ -57,3 +62,9 @@ def test_supports_selected_output_languages() -> None:
     assert translator.translate("Proveedor", target_language="es").translated == "Proveedor"
     assert translator.translate("Proveedor", target_language="fr").translated == "Fournisseur"
     assert translator.translate("Proveedor", target_language="ar").translated == "المورّد"
+
+
+def test_rejects_pathological_repeated_model_output() -> None:
+    translator = TranslationService(service().glossary, RepeatingProvider())
+    result = translator.translate("Texto desconocido")
+    assert result.translated == "[Untranslated] Texto desconocido"
