@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-from pathlib import Path
 
 from PIL import Image
 from PySide6.QtCore import QPoint, QRect, QThreadPool, QTimer, Qt
@@ -29,9 +28,11 @@ from app.services.glossary_service import GlossaryService
 from app.services.hotkey_service import HotkeyService
 from app.services.hover_service import HoverService
 from app.services.hover_translation_worker import HoverTranslationWorker
+from app.services.local_model_provider import LocalModelTranslationProvider
 from app.services.ocr_service import OCRService
 from app.services.screenshot_service import ScreenshotService
-from app.services.translation_service import LocalArgosTranslationProvider, TranslationService
+from app.services.translation_service import TranslationService
+from app.utils.resources import resource_root
 
 LOGGER = logging.getLogger(__name__)
 
@@ -45,9 +46,12 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("ERP Translator")
         self.setFixedWidth(330)
 
-        self.root = Path(__file__).resolve().parents[2]
+        self.root = resource_root()
         glossary = GlossaryService(self.root / "data" / "glossary.json")
-        self.translation_service = TranslationService(glossary, LocalArgosTranslationProvider())
+        self.translation_service = TranslationService(
+            glossary,
+            LocalModelTranslationProvider(self.root / "models"),
+        )
         self.screenshot_service = ScreenshotService()
         self.ocr_service = self._make_ocr_service()
         self.overlay = CaptureOverlay()
@@ -109,10 +113,20 @@ class MainWindow(QMainWindow):
         self._create_tray()
 
     def _make_ocr_service(self) -> OCRService:
+        bundled_tesseract = self.root / "tesseract" / "tesseract.exe"
+        configured_path = self.settings.tesseract_path
+        if not configured_path and bundled_tesseract.exists():
+            configured_path = str(bundled_tesseract)
+        bundled_tessdata = self.root / "tesseract" / "tessdata"
+        tessdata_dir = (
+            bundled_tessdata
+            if bundled_tessdata.exists()
+            else self.root / ".runtime" / "tessdata"
+        )
         return OCRService(
-            self.settings.tesseract_path,
+            configured_path,
             self.settings.ocr_language,
-            self.root / ".runtime" / "tessdata",
+            tessdata_dir,
         )
 
     def _create_tray(self) -> None:

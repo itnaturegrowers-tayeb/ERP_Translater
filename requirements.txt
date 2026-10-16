@@ -3,4 +3,7 @@ mss>=9,<11
 Pillow>=10,<13
 pynput>=1.7,<2
 pytesseract>=0.3.10,<0.4
-argostranslate==1.11.0
+ctranslate2>=4.6,<5
+sentencepiece>=0.2,<0.3
+sacremoses>=0.1,<0.2
+subword-nmt>=0.3.8,<0.4

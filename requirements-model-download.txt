@@ -1,0 +1,2 @@
+# Only needed by maintainers to download/update Argos model packages.
+argostranslate==1.11.0

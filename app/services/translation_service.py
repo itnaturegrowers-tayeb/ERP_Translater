@@ -29,29 +29,6 @@ class DisabledTranslationProvider(TranslationProvider):
         return None
 
 
-class LocalArgosTranslationProvider(TranslationProvider):
-    """Offline neural translation using an installed Argos language model."""
-
-    def __init__(self) -> None:
-        self._translate_module = None
-        try:
-            import argostranslate.translate
-
-            self._translate_module = argostranslate.translate
-        except Exception as exc:
-            LOGGER.warning("Local Argos translation is unavailable: %s", exc)
-
-    def translate(self, text: str, source_language: str, target_language: str) -> str | None:
-        if self._translate_module is None or not text.strip():
-            return None
-        try:
-            translated = self._translate_module.translate(text, source_language, target_language)
-            return translated.strip() or None
-        except Exception as exc:
-            LOGGER.warning("Local translation failed: %s", exc)
-            return None
-
-
 class TranslationService:
     def __init__(self, glossary: GlossaryService, provider: TranslationProvider | None = None) -> None:
         self.glossary = glossary

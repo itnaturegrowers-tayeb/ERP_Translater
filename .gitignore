@@ -6,7 +6,10 @@ __pycache__/
 venv/
 build/
 dist/
+installer-output/
+packaging/resources/
 *.spec
+!packaging/*.spec
 *.log
 .idea/
 .vscode/
