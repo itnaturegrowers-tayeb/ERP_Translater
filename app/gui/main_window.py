@@ -68,8 +68,10 @@ class MainWindow(QMainWindow):
         exit_button = QPushButton("Exit")
         self.explain = QCheckBox("Explain ERP meaning")
         self.explain.setChecked(settings.explain_erp)
-        self.automatic_hover = QCheckBox("Automatic mouse-hover translation")
+        self.automatic_hover = QPushButton()
+        self.automatic_hover.setCheckable(True)
         self.automatic_hover.setChecked(settings.automatic_hover)
+        self._update_bot_button(settings.automatic_hover)
         hint = QLabel("Global hotkey: Ctrl+Shift+T")
         hint.setAlignment(Qt.AlignCenter)
 
@@ -121,11 +123,17 @@ class MainWindow(QMainWindow):
         show_action = QAction("Show ERP Translator", self)
         translate_action = QAction("Translate Area", self)
         exit_action = QAction("Exit", self)
+        self.bot_tray_action = QAction(self)
+        self.bot_tray_action.setCheckable(True)
+        self.bot_tray_action.setChecked(self.settings.automatic_hover)
+        self._update_tray_bot_action(self.settings.automatic_hover)
         show_action.triggered.connect(self.show_normal)
         translate_action.triggered.connect(self.start_capture)
         exit_action.triggered.connect(self.quit_application)
+        self.bot_tray_action.triggered.connect(self.automatic_hover.setChecked)
         menu.addAction(show_action)
         menu.addAction(translate_action)
+        menu.addAction(self.bot_tray_action)
         menu.addSeparator()
         menu.addAction(exit_action)
         self.tray.setContextMenu(menu)
@@ -169,6 +177,7 @@ class MainWindow(QMainWindow):
                 self.ocr_service,
                 self.translation_service,
                 self.explain.isChecked(),
+                self.settings.target_language,
             )
             worker.signals.completed.connect(self._hover_translation_completed)
             worker.signals.failed.connect(self._hover_translation_failed)
@@ -226,7 +235,11 @@ class MainWindow(QMainWindow):
         QApplication.setOverrideCursor(Qt.WaitCursor)
         try:
             text = self.ocr_service.extract_text(image)
-            result = self.translation_service.translate(text, self.explain.isChecked())
+            result = self.translation_service.translate(
+                text,
+                self.explain.isChecked(),
+                self.settings.target_language,
+            )
             self.result_window.show_result(result)
         finally:
             QApplication.restoreOverrideCursor()
@@ -265,12 +278,35 @@ class MainWindow(QMainWindow):
     def automatic_hover_toggled(self, checked: bool) -> None:
         self.settings.automatic_hover = checked
         self.settings.save()
+        self._update_bot_button(checked)
+        if hasattr(self, "bot_tray_action"):
+            self.bot_tray_action.setChecked(checked)
+            self._update_tray_bot_action(checked)
         self._last_hover_text = ""
         if checked:
             self.hover_service.start()
         else:
             self.hover_service.stop()
             self.hover_popup.hide()
+
+    def _update_bot_button(self, enabled: bool) -> None:
+        if enabled:
+            self.automatic_hover.setText("Translation Bot: ON")
+            self.automatic_hover.setStyleSheet(
+                "QPushButton { background: #238636; color: white; font-weight: 600; "
+                "padding: 9px; border-radius: 5px; }"
+                "QPushButton:hover { background: #2ea043; }"
+            )
+        else:
+            self.automatic_hover.setText("Translation Bot: OFF")
+            self.automatic_hover.setStyleSheet(
+                "QPushButton { background: #b42318; color: white; font-weight: 600; "
+                "padding: 9px; border-radius: 5px; }"
+                "QPushButton:hover { background: #d92d20; }"
+            )
+
+    def _update_tray_bot_action(self, enabled: bool) -> None:
+        self.bot_tray_action.setText("Turn Bot OFF" if enabled else "Turn Bot ON")
 
     def remember_result_position(self, x: int, y: int) -> None:
         if not self.result_window.isVisible():

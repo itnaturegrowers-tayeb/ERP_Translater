@@ -4,6 +4,8 @@ A local Windows desktop MVP that captures visible text (including an RDP window)
 
 Screenshots never leave the computer. The app applies its ERP glossary first, then uses a local Argos Spanish-to-English neural model for unmatched text. No screenshot or recognized text is sent to an online translation service.
 
+Output can be selected in Settings: Spanish, English, French, or Arabic. French and Arabic use local English bridge models so ERP glossary terminology is applied first.
+
 ## Requirements
 
 - Windows 10 or 11
@@ -44,7 +46,7 @@ python main.py
 ```
 
 1. Leave Spanish ERP text visible locally (RDP may be full-screen or windowed).
-2. Leave the pointer still over text for about one second to get an automatic compact translation popup. Disable **Automatic mouse-hover translation** if you do not want this behavior.
+2. Leave the pointer still over text for about one second to get an automatic compact translation popup. Use the green **Translation Bot: ON** button to pause it; the button turns red and reads **Translation Bot: OFF** while paused.
 3. For a precise area, press **Ctrl+Shift+T**, or click **Translate Area**.
 4. Drag a rectangle around the text. Press Escape to cancel.
 5. Review the OCR source and English glossary translation in the floating result window.

@@ -6,7 +6,12 @@ from app.services.translation_service import TranslationProvider, TranslationSer
 
 class StubProvider(TranslationProvider):
     def translate(self, text: str, source_language: str, target_language: str) -> str | None:
-        return {"y": "and", "Texto desconocido": "Unknown text"}.get(text)
+        return {
+            ("y", "es", "en"): "and",
+            ("Texto desconocido", "es", "en"): "Unknown text",
+            ("Supplier", "en", "fr"): "Fournisseur",
+            ("Supplier", "en", "ar"): "المورّد",
+        }.get((text, source_language, target_language))
 
 
 def service() -> TranslationService:
@@ -45,3 +50,10 @@ def test_repairs_damaged_ocr_using_known_erp_term() -> None:
     result = service().translate("6 comsatareaciones y situación Sujeto IES")
     assert result.translated == "Business Partner Relationships and Status"
     assert result.corrected_original == "Consulta relaciones y situación Sujeto"
+
+
+def test_supports_selected_output_languages() -> None:
+    translator = TranslationService(service().glossary, StubProvider())
+    assert translator.translate("Proveedor", target_language="es").translated == "Proveedor"
+    assert translator.translate("Proveedor", target_language="fr").translated == "Fournisseur"
+    assert translator.translate("Proveedor", target_language="ar").translated == "المورّد"

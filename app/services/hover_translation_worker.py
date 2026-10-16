@@ -24,6 +24,7 @@ class HoverTranslationWorker(QRunnable):
         ocr_service: OCRService,
         translation_service: TranslationService,
         explain: bool,
+        target_language: str,
     ) -> None:
         super().__init__()
         self.image = image
@@ -31,13 +32,18 @@ class HoverTranslationWorker(QRunnable):
         self.ocr_service = ocr_service
         self.translation_service = translation_service
         self.explain = explain
+        self.target_language = target_language
         self.signals = HoverWorkerSignals()
 
     @Slot()
     def run(self) -> None:
         try:
             text = self.ocr_service.extract_hover_line(self.image).strip()
-            result = self.translation_service.translate(text, self.explain) if text else None
+            result = (
+                self.translation_service.translate(text, self.explain, self.target_language)
+                if text
+                else None
+            )
             self.signals.completed.emit(result, self.pointer, text)
         except Exception as exc:
             LOGGER.exception("Hover translation worker failed")

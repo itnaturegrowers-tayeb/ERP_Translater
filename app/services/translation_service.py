@@ -8,6 +8,13 @@ from app.services.glossary_service import GlossaryService
 
 LOGGER = logging.getLogger(__name__)
 
+LANGUAGE_NAMES = {
+    "es": "Spanish",
+    "en": "English",
+    "fr": "French",
+    "ar": "Arabic",
+}
+
 
 class TranslationProvider(ABC):
     """Replace this provider to add an API or local language model later."""
@@ -50,10 +57,20 @@ class TranslationService:
         self.glossary = glossary
         self.provider = provider or DisabledTranslationProvider()
 
-    def translate(self, text: str, include_explanations: bool = False) -> TranslationResult:
+    def translate(
+        self,
+        text: str,
+        include_explanations: bool = False,
+        target_language: str = "en",
+    ) -> TranslationResult:
+        target_language = target_language if target_language in LANGUAGE_NAMES else "en"
         original = text.strip()
         if not original:
-            return TranslationResult(original="", translated="No text was recognized.")
+            return TranslationResult(
+                original="",
+                translated="No text was recognized.",
+                target_language=LANGUAGE_NAMES[target_language],
+            )
 
         output: list[str] = []
         corrected_source: list[str] = []
@@ -107,13 +124,35 @@ class TranslationService:
                 for match in matches
                 if match.explanation
             )
+        english_translation = "\n".join(output)
+        corrected_original = "\n".join(corrected_source)
+        if target_language == "es":
+            translated = corrected_original
+        elif target_language == "en":
+            translated = english_translation
+        else:
+            translated = self._translate_multiline(english_translation, "en", target_language)
+
+        if explanation and target_language != "en":
+            explanation = self._translate_multiline(explanation, "en", target_language)
+
         return TranslationResult(
             original=original,
-            translated="\n".join(output),
+            translated=translated,
             matches=matches,
             explanation=explanation,
-            corrected_original="\n".join(corrected_source),
+            corrected_original=corrected_original,
+            target_language=LANGUAGE_NAMES[target_language],
         )
+
+    def _translate_multiline(self, text: str, source: str, target: str) -> str:
+        translated_lines: list[str] = []
+        for line in text.splitlines():
+            if not line.strip():
+                translated_lines.append("")
+                continue
+            translated_lines.append(self.provider.translate(line, source, target) or line)
+        return "\n".join(translated_lines)
 
     @staticmethod
     def _append_unique(target: list[GlossaryMatch], additions: list[GlossaryMatch]) -> None:

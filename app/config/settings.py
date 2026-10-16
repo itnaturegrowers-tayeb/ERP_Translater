@@ -14,6 +14,7 @@ LOGGER = logging.getLogger(__name__)
 class AppSettings:
     tesseract_path: str = ""
     ocr_language: str = "spa"
+    target_language: str = "en"
     explain_erp: bool = True
     automatic_hover: bool = True
     result_x: int | None = None

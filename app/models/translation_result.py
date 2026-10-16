@@ -18,3 +18,4 @@ class TranslationResult:
     matches: list[GlossaryMatch] = field(default_factory=list)
     explanation: str = ""
     corrected_original: str = ""
+    target_language: str = "English"
